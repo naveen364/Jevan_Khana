@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="100dp"
+    android:layout_height="match_parent"
+    android:id="@+id/mealtypelayout"
+    android:background="@drawable/circle"
+    android:layout_margin="8dp"
+    android:padding="8dp"
+    android:orientation="vertical">
+    <com.google.android.material.imageview.ShapeableImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/main100"
+        android:id="@+id/mealurl"
+        android:layout_gravity="center"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/mealname"
+        android:textSize="14sp"
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:padding="8dp"
+        android:text="Main Course"/>
+</LinearLayout>

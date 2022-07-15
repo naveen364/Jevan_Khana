@@ -1,9 +1,11 @@
 package com.codewithnaveen.JevanKhana.Adapters;
 
 import android.content.Context;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -40,7 +42,15 @@ public class RandomRecipeAdapter extends RecyclerView.Adapter<RandomRecipeViewHo
         holder.textView_servings.setText(list.get(position).servings+" Servings");
         holder.textView_time.setText(list.get(position).readyInMinutes + " Minutes");
         Picasso.get().load(list.get(position).image).into(holder.imageView_food);
+        holder.random_list_container.getLayoutParams().width = getScreenWidth(context)/2;
 
+    }
+    public static int getScreenWidth(Context context) {
+        WindowManager wm= (WindowManager) context
+                .getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics dm = new DisplayMetrics();
+        wm.getDefaultDisplay().getMetrics(dm);
+        return dm.widthPixels;
     }
 
     @Override
@@ -63,4 +73,5 @@ class RandomRecipeViewHolder extends RecyclerView.ViewHolder {
         textView_likes = itemView.findViewById(R.id.textView_likes);
         imageView_food = itemView.findViewById(R.id.imageView_food);
     }
+
 }

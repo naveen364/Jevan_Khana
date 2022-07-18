@@ -25,11 +25,22 @@
                 android:textColor="@color/white"/>
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
-    <androidx.appcompat.widget.SearchView
-        android:layoutDirection="rtl"
-        android:id="@+id/search_bar"
+    <androidx.cardview.widget.CardView
+        android:elevation="8dp"
+        app:cardBackgroundColor="@color/gray"
+        android:layout_margin="8dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="?attr/actionBarSize">
+
+        <androidx.appcompat.widget.SearchView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/searchHome"
+            app:queryHint="search your reciepe"
+            app:iconifiedByDefault="false"
+            app:searchIcon="@drawable/ic_baseline_search_24"/>
+
+    </androidx.cardview.widget.CardView>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

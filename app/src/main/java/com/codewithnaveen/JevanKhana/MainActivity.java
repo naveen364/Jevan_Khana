@@ -1,11 +1,13 @@
 package com.codewithnaveen.JevanKhana;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -14,6 +16,7 @@ import com.codewithnaveen.JevanKhana.Adapters.MealTypeAdapter;
 import com.codewithnaveen.JevanKhana.Adapters.OnItemClickListener;
 import com.codewithnaveen.JevanKhana.Adapters.RandomRecipeAdapter;
 import com.codewithnaveen.JevanKhana.Listeners.RandomRecipeResponseListener;
+import com.codewithnaveen.JevanKhana.Listeners.RecipeClickListener;
 import com.codewithnaveen.JevanKhana.Models.RandomRecipeApiResponse;
 import com.codewithnaveen.JevanKhana.Models.mealType;
 
@@ -30,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     LinearLayoutManager HorizontalLayout,hlayout,hlayout1;
     ArrayList<mealType> mealTypeArrayList = new ArrayList<>();
     List<String> tags = new ArrayList<>();
+    SearchView searchView;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -40,6 +44,22 @@ public class MainActivity extends AppCompatActivity {
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Loding...");
+        searchView = findViewById(R.id.searchHome);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                tags.clear();
+                tags.add(query);
+                requestManager.getRandomRecipes(randomRecipeResponseListener,tags);
+                progressDialog.show();
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
         HorizontalLayout
                 = new LinearLayoutManager(
                 MainActivity.this,
@@ -58,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
             recyclerView = findViewById(R.id.recycler_random);
             recyclerView.setHasFixedSize(true);
             recyclerView.setLayoutManager(HorizontalLayout);
-            randomRecipeAdapter = new RandomRecipeAdapter(MainActivity.this,response.recipes);
+            randomRecipeAdapter = new RandomRecipeAdapter(MainActivity.this,response.recipes,recipeClickListener);
             recyclerView.setAdapter(randomRecipeAdapter);
             progressDialog.hide();
         }
@@ -76,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
             infoRecyclerView = findViewById(R.id.mealList);
             infoRecyclerView.setHasFixedSize(true);
             infoRecyclerView.setLayoutManager(hlayout1);
-            randomRecipeAdapter = new RandomRecipeAdapter(MainActivity.this,response.recipes);
+            randomRecipeAdapter = new RandomRecipeAdapter(MainActivity.this,response.recipes,recipeClickListener);
             infoRecyclerView.setAdapter(randomRecipeAdapter);
             progressDialog.hide();
         }
@@ -122,4 +142,13 @@ public class MainActivity extends AppCompatActivity {
         });
         mealTypeRecyclerView.setAdapter(mealTypeAdapter);
     }
+    private final RecipeClickListener recipeClickListener = new RecipeClickListener() {
+        @Override
+        public void onRecipeClicked(String id) {
+            //Toast.makeText(MainActivity.this,id,Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(MainActivity.this,ReciepeDetailActivity.class)
+            .putExtra("id",id));
+
+        }
+    };
 }

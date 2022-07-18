@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.codewithnaveen.JevanKhana.Listeners.RecipeClickListener;
 import com.codewithnaveen.JevanKhana.Models.Recipe;
 import com.codewithnaveen.JevanKhana.R;
 import com.squareup.picasso.Picasso;
@@ -22,10 +23,12 @@ import java.util.List;
 public class RandomRecipeAdapter extends RecyclerView.Adapter<RandomRecipeViewHolder>{
     Context context;
     List<Recipe> list;
+    RecipeClickListener listener;
 
-    public RandomRecipeAdapter(Context context, List<Recipe> list) {
+    public RandomRecipeAdapter(Context context, List<Recipe> list, RecipeClickListener listener) {
         this.context = context;
         this.list = list;
+        this.listener = listener;
     }
 
     @NonNull
@@ -38,11 +41,17 @@ public class RandomRecipeAdapter extends RecyclerView.Adapter<RandomRecipeViewHo
     public void onBindViewHolder(@NonNull RandomRecipeViewHolder holder, int position) {
         holder.textView_title.setText(list.get(position).title);
         holder.textView_title.setSelected(true);
-        holder.textView_likes.setText(list.get(position).aggregateLikes+" Likes");
-        holder.textView_servings.setText(list.get(position).servings+" Servings");
-        holder.textView_time.setText(list.get(position).readyInMinutes + " Minutes");
+        holder.textView_likes.setText(list.get(position).aggregateLikes+"");
+        holder.textView_servings.setText(list.get(position).servings+"");
+        holder.textView_time.setText(list.get(position).readyInMinutes + "");
         Picasso.get().load(list.get(position).image).into(holder.imageView_food);
         holder.random_list_container.getLayoutParams().width = getScreenWidth(context)/2;
+        holder.random_list_container.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onRecipeClicked(String.valueOf(list.get(holder.getAdapterPosition()).id));
+            }
+        });
 
     }
     public static int getScreenWidth(Context context) {

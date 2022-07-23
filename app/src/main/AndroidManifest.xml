@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.JevanKhana">
         <activity
+            android:name=".seemoreActivity"
+            android:exported="false" />
+        <activity
             android:name=".ReciepeDetailActivity"
             android:exported="false" />
         <activity

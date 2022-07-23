@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Jevan Khana</string>
-    <string name="api_key">bd1cfcb2069f409493db504e9ea55b95</string>
+    <string name="key">bd1cfcb2069f409493db504e9ea55b95/ 2d5b7ae0e9c84a99acbcde3427c0df00/ 77ec17c173ef4bd1aedd5447627a2758/ 4c25c1c708d242278bc17de761ae8730/ 61bc4c9959c64e1ea71dd02f3c6408ce</string>
+    <string name="api_key">61bc4c9959c64e1ea71dd02f3c6408ce</string>
     <string-array name="tags">
         <item>main course</item>
         <item>side dish</item>
@@ -16,4 +17,6 @@
         <item>snack</item>
         <item>drink</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

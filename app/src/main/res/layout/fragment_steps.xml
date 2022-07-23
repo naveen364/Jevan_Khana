@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="500dp"
+    android:background="@color/teal_700"
+    tools:context=".Fragments.StepsFragment">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/meal_Instruction_steps"
+        android:layout_width="match_parent"
+        android:layout_margin="8dp"
+        android:layout_height="match_parent"/>
+
+</FrameLayout>

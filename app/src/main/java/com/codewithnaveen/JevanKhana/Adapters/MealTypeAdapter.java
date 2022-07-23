@@ -22,8 +22,14 @@ public class MealTypeAdapter extends RecyclerView.Adapter<MealTypeAdapter.ViewHo
 
     private ArrayList<mealType> mealTypeArrayList;
     private Context context;
-    private final OnItemClickListener listener;
+    private OnItemClickListener listener;
     private int row_index = -1;
+    Boolean stopRecursion = true;
+
+    public MealTypeAdapter(ArrayList<mealType> mealTypeArrayList, Context context) {
+        this.mealTypeArrayList = mealTypeArrayList;
+        this.context = context;
+    }
 
     public MealTypeAdapter(ArrayList<mealType> mealTypeArrayList, Context context, OnItemClickListener listener) {
         this.mealTypeArrayList = mealTypeArrayList;
@@ -71,13 +77,21 @@ public class MealTypeAdapter extends RecyclerView.Adapter<MealTypeAdapter.ViewHo
                     listener.onItemClick(meal);
                 }
             });
-
-            if(row_index == position){
+            if(position == 0 && stopRecursion){
                 row_linearlayout.setBackground(context.getDrawable(R.drawable.selected_circle));
-                Name.setTextColor(R.color.black);
-            }else{
-                Name.setTextColor(R.color.white);
-                row_linearlayout.setBackground(context.getDrawable(R.drawable.circle));
+                listener.onItemClick(meal);
+                stopRecursion = false;
+            }else {
+                if (row_index == position) {
+                    if(position == 0){
+                        row_linearlayout.setBackground(context.getDrawable(R.drawable.circle));
+                    }
+                    row_linearlayout.setBackground(context.getDrawable(R.drawable.selected_circle));
+                    Name.setTextColor(R.color.black);
+                } else {
+                    Name.setTextColor(R.color.white);
+                    row_linearlayout.setBackground(context.getDrawable(R.drawable.circle));
+                }
             }
 
         }

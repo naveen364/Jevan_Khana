@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -8,12 +9,25 @@
     android:layout_margin="8dp"
     android:id="@+id/similar_recipe_card">
 
-    <LinearLayout
+    <RelativeLayout
         android:orientation="vertical"
         android:gravity="center"
         android:layout_margin="4dp"
         android:layout_width="150dp"
         android:layout_height="wrap_content">
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="center"
+            android:id="@+id/similar_recipe_image"/>
+
+        <LinearLayout
+            android:layout_alignBottom="@id/similar_recipe_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/trans_shade"
+            android:orientation="horizontal">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -27,15 +41,11 @@
             android:padding="8dp"
             android:id="@+id/similar_title_Name"
             android:textColor="@color/white"/>
-        <com.google.android.material.imageview.ShapeableImageView
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:scaleType="centerCrop"
-            android:id="@+id/similar_recipe_image"/>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="similar Name"
+            android:text="serve"
             android:textStyle="italic"
             android:textAlignment="center"
             android:singleLine="true"
@@ -45,7 +55,8 @@
             android:padding="8dp"
             android:id="@+id/similar_serving"
             android:textColor="@color/white"/>
+        </LinearLayout>
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

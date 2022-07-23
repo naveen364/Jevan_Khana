@@ -2,14 +2,17 @@ package com.codewithnaveen.JevanKhana;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.WindowManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codewithnaveen.JevanKhana.Adapters.MealTypeAdapter;
@@ -32,8 +35,11 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView,mealTypeRecyclerView,infoRecyclerView;
     LinearLayoutManager HorizontalLayout,hlayout,hlayout1;
     ArrayList<mealType> mealTypeArrayList = new ArrayList<>();
+    StaggeredGridLayoutManager staggeredGridLayoutManager;
     List<String> tags = new ArrayList<>();
     SearchView searchView;
+    TextView seemore;
+    String mealtypename = null;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -44,6 +50,11 @@ public class MainActivity extends AppCompatActivity {
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Loding...");
+        seemore = findViewById(R.id.more_detail_meal);
+        seemore.setOnClickListener((v -> {
+            startActivity(new Intent(MainActivity.this,seemoreActivity.class)
+                    .putExtra("type",mealtypename));
+        }));
         searchView = findViewById(R.id.searchHome);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -95,7 +106,10 @@ public class MainActivity extends AppCompatActivity {
         public void didFetch(RandomRecipeApiResponse response, String message) {
             infoRecyclerView = findViewById(R.id.mealList);
             infoRecyclerView.setHasFixedSize(true);
-            infoRecyclerView.setLayoutManager(hlayout1);
+            infoRecyclerView.setLayoutManager( new LinearLayoutManager(
+                    MainActivity.this,
+                    LinearLayoutManager.HORIZONTAL,
+                    false));
             randomRecipeAdapter = new RandomRecipeAdapter(MainActivity.this,response.recipes,recipeClickListener);
             infoRecyclerView.setAdapter(randomRecipeAdapter);
             progressDialog.hide();
@@ -129,12 +143,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(mealType mealTypes) {
                 requestManager1 = new RequestManager(MainActivity.this);
-                hlayout1 = new LinearLayoutManager(
-                        MainActivity.this,
-                        LinearLayoutManager.HORIZONTAL,
-                        false);
+                staggeredGridLayoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
                 tags.clear();
                 tags.add(mealTypes.getName());
+                mealtypename = mealTypes.getName();
                 requestManager1.getRandomRecipes(randomMealTypeResponseListener,tags);
                 progressDialog.show();
                 Toast.makeText(MainActivity.this, "mealType==>"+mealTypes.getName(), Toast.LENGTH_SHORT).show();

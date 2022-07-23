@@ -31,6 +31,11 @@ public class RandomRecipeAdapter extends RecyclerView.Adapter<RandomRecipeViewHo
         this.listener = listener;
     }
 
+    public RandomRecipeAdapter(Context context, List<Recipe> list) {
+        this.context = context;
+        this.list = list;
+    }
+
     @NonNull
     @Override
     public RandomRecipeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -59,7 +64,7 @@ public class RandomRecipeAdapter extends RecyclerView.Adapter<RandomRecipeViewHo
                 .getSystemService(Context.WINDOW_SERVICE);
         DisplayMetrics dm = new DisplayMetrics();
         wm.getDefaultDisplay().getMetrics(dm);
-        return dm.widthPixels;
+        return (int)(dm.widthPixels - 100);
     }
 
     @Override

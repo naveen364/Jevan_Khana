@@ -2,9 +2,11 @@ package com.codewithnaveen.JevanKhana;
 
 import android.content.Context;
 
+import com.codewithnaveen.JevanKhana.Listeners.InstructionListener;
 import com.codewithnaveen.JevanKhana.Listeners.RandomRecipeResponseListener;
 import com.codewithnaveen.JevanKhana.Listeners.RecipeDetailsListner;
 import com.codewithnaveen.JevanKhana.Listeners.SimilarRecipeListener;
+import com.codewithnaveen.JevanKhana.Models.InstructionResponse;
 import com.codewithnaveen.JevanKhana.Models.RandomRecipeApiResponse;
 import com.codewithnaveen.JevanKhana.Models.ReciepeDetailsResponse;
 import com.codewithnaveen.JevanKhana.Models.SimilarRecipe;
@@ -33,7 +35,7 @@ public class RequestManager {
 
     public void getRandomRecipes(RandomRecipeResponseListener listener, List<String> tags){
         CallRandomRecipes callRandomRecipes = retrofit.create(CallRandomRecipes.class);
-        Call<RandomRecipeApiResponse> call = callRandomRecipes.callRandomRecipe(context.getString(R.string.api_key),"10",tags);
+        Call<RandomRecipeApiResponse> call = callRandomRecipes.callRandomRecipe(context.getString(R.string.api_key),"30",tags);
         call.enqueue(new Callback<RandomRecipeApiResponse>() {
             @Override
             public void onResponse(Call<RandomRecipeApiResponse> call, Response<RandomRecipeApiResponse> response) {
@@ -73,7 +75,7 @@ public class RequestManager {
 
     public void getSimilarRecipe(SimilarRecipeListener listener, int id){
         CallSimilarRecipes callSimilarRecipes = retrofit.create(CallSimilarRecipes.class);
-        Call<List<SimilarRecipe>> call = callSimilarRecipes.callSimilarRecipe(id,"4",context.getString(R.string.api_key));
+        Call<List<SimilarRecipe>> call = callSimilarRecipes.callSimilarRecipe(id,"8",context.getString(R.string.api_key));
         call.enqueue(new Callback<List<SimilarRecipe>>() {
             @Override
             public void onResponse(Call<List<SimilarRecipe>> call, Response<List<SimilarRecipe>> response) {
@@ -86,6 +88,26 @@ public class RequestManager {
 
             @Override
             public void onFailure(Call<List<SimilarRecipe>> call, Throwable t) {
+                listener.didError(t.getMessage());
+            }
+        });
+    }
+
+    public void getInstruction(InstructionListener listener, int id){
+        CallInstructionStep callInstructionStep = retrofit.create(CallInstructionStep.class);
+        Call<List<InstructionResponse>> call = callInstructionStep.callInstructionResponse(id,context.getString(R.string.api_key));
+        call.enqueue(new Callback<List<InstructionResponse>>() {
+            @Override
+            public void onResponse(Call<List<InstructionResponse>> call, Response<List<InstructionResponse>> response) {
+                if(!response.isSuccessful()){
+                    listener.didError(response.message());
+                    return;
+                }
+                listener.didFetch(response.body(),response.message());
+            }
+
+            @Override
+            public void onFailure(Call<List<InstructionResponse>> call, Throwable t) {
                 listener.didError(t.getMessage());
             }
         });
@@ -113,6 +135,14 @@ public class RequestManager {
         Call<List<SimilarRecipe>> callSimilarRecipe(
                 @Path("id") int id,
                 @Query("number") String number,
+                @Query("apiKey") String apiKey
+        );
+    }
+
+    private interface CallInstructionStep{
+        @GET("recipes/{id}/analyzedInstructions")
+        Call<List<InstructionResponse>> callInstructionResponse(
+                @Path("id") int id,
                 @Query("apiKey") String apiKey
         );
     }

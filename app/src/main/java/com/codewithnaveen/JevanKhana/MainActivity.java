@@ -18,6 +18,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.amrdeveloper.lottiedialog.LottieDialog;
 import com.codewithnaveen.JevanKhana.Adapters.MealTypeAdapter;
 import com.codewithnaveen.JevanKhana.Adapters.OnItemClickListener;
 import com.codewithnaveen.JevanKhana.Adapters.RandomRecipeAdapter;
@@ -31,7 +32,6 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    ProgressDialog progressDialog;
     RequestManager requestManager,requestManager1;
     RandomRecipeAdapter randomRecipeAdapter, randomTypeRecipeAdapter;
     MealTypeAdapter mealTypeAdapter;
@@ -41,9 +41,10 @@ public class MainActivity extends AppCompatActivity {
     StaggeredGridLayoutManager staggeredGridLayoutManager;
     List<String> tags = new ArrayList<>();
     SearchView searchView;
-    TextView seemore,selected_meal_Type;
+    TextView seemore,selected_meal_Type,meal_Trend,meal_type_textview;
     String mealtypename = null;
     Shader shader;
+    LottieDialog progressDialog;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -51,7 +52,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        progressDialog = new ProgressDialog(this);
+        progressDialog = new LottieDialog(this)
+                .setAnimation(R.raw.food_loading)
+                .setAnimationRepeatCount(LottieDialog.INFINITE)
+                .setAutoPlayAnimation(true)
+                .setMessage("Take a Profile Picture");
         progressDialog.setTitle("Loding...");
         seemore = findViewById(R.id.more_detail_meal);
         seemore.setOnClickListener((v -> {
@@ -59,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
                     .putExtra("type",mealtypename));
         }));
         selected_meal_Type = findViewById(R.id.selected_meal_Type);
+        meal_type_textview =findViewById(R.id.meal_type_textview);
+        meal_Trend = findViewById(R.id.meal_Trend);
         searchView = findViewById(R.id.searchHome);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -120,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void didError(String message) {
             Toast.makeText(MainActivity.this, "message", Toast.LENGTH_SHORT).show();
-            progressDialog.hide();
+            progressDialog.dismiss();
         }
     };
 
@@ -152,6 +159,8 @@ public class MainActivity extends AppCompatActivity {
                         0, 0, 0, 100,
                         Color.BLUE, Color.parseColor("#E91E63"),
                         Shader.TileMode.CLAMP );
+                meal_Trend.getPaint().setShader(shader);
+                meal_type_textview.getPaint().setShader(shader);
                 selected_meal_Type.setText(mealTypes.getName());
                 selected_meal_Type.getPaint().setShader( shader );
                 mealtypename = mealTypes.getName();
@@ -181,6 +190,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        progressDialog.hide();
+        progressDialog.dismiss();
     }
 }

@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.amrdeveloper.lottiedialog.LottieDialog;
 import com.codewithnaveen.JevanKhana.Adapters.InstructionAdapter;
 import com.codewithnaveen.JevanKhana.Adapters.SimilarRecipeAdapter;
 import com.codewithnaveen.JevanKhana.Adapters.ViewPagerFragmentAdapter;
@@ -42,7 +43,7 @@ public class ReciepeDetailActivity extends AppCompatActivity {
     ImageView meal_image;
     RecyclerView ingredientRecycler,similarMealRecycler;//,meal_Instruction_steps;
     RequestManager manager;
-    ProgressDialog dialog;
+    LottieDialog dialog;
     ingredientsAdapter ingredientsAdapters;
     SimilarRecipeAdapter similarRecipeAdapter;
     InstructionAdapter instructionAdapter;
@@ -73,7 +74,11 @@ public class ReciepeDetailActivity extends AppCompatActivity {
         manager.getRecipeDetails(recipeDetailsListner,id);
         //manager.getSimilarRecipe(similarRecipeListener,id);
         //manager.getInstruction(instructionListener,id);
-        dialog = new ProgressDialog(this);
+        dialog = new LottieDialog(this)
+                .setAnimation(R.raw.food_loading)
+                .setAnimationRepeatCount(LottieDialog.INFINITE)
+                .setAutoPlayAnimation(true)
+                .setMessage("Take a Profile Picture");
         dialog.setTitle("Loading...");
         dialog.show();
     }

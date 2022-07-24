@@ -12,6 +12,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.amrdeveloper.lottiedialog.LottieDialog;
 import com.codewithnaveen.JevanKhana.Adapters.MealTypeAdapter;
 import com.codewithnaveen.JevanKhana.Adapters.OnItemClickListener;
 import com.codewithnaveen.JevanKhana.Adapters.RandomRecipeAdapter;
@@ -25,7 +26,7 @@ import java.util.List;
 
 public class seemoreActivity extends AppCompatActivity {
 
-    ProgressDialog progressDialog1;
+    LottieDialog progressDialog1;
     RequestManager requestManager11;
     StaggeredGridLayoutManager staggeredGridLayoutManager1;
     List<String> tags = new ArrayList<>();
@@ -39,7 +40,11 @@ public class seemoreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seemore);
         //this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        progressDialog1 = new ProgressDialog(this);
+        progressDialog1 = new LottieDialog(this)
+                .setAnimation(R.raw.food_loading)
+                .setAnimationRepeatCount(LottieDialog.INFINITE)
+                .setAutoPlayAnimation(true)
+                .setMessage("Take a Profile Picture");
         progressDialog1.setTitle("Loding...");
         typeofmeal = findViewById(R.id.typeofmeal);
         typeofmeal.setText("main course");
@@ -54,13 +59,13 @@ public class seemoreActivity extends AppCompatActivity {
             infoRecyclerView1.setLayoutManager(staggeredGridLayoutManager1);
             randomRecipeAdapter1 = new RandomRecipeAdapter(seemoreActivity.this,response.recipes,recipeClickListener);
             infoRecyclerView1.setAdapter(randomRecipeAdapter1);
-            progressDialog1.hide();
+            progressDialog1.dismiss();
         }
 
         @Override
         public void didError(String message) {
             Toast.makeText(seemoreActivity.this, "message", Toast.LENGTH_SHORT).show();
-            progressDialog1.hide();
+            progressDialog1.dismiss();
         }
     };
     private final RecipeClickListener recipeClickListener = new RecipeClickListener() {

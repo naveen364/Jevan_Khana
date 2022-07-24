@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.amrdeveloper.lottiedialog.LottieDialog;
 import com.codewithnaveen.JevanKhana.Adapters.RandomRecipeAdapter;
 import com.codewithnaveen.JevanKhana.Listeners.RandomRecipeResponseListener;
 import com.codewithnaveen.JevanKhana.Listeners.RecipeClickListener;
@@ -25,13 +26,17 @@ public class searchActivity extends AppCompatActivity {
     List<String> tags = new ArrayList<>();
     RandomRecipeAdapter randomRecipeAdapter;
     String query;
-    ProgressDialog dialog;
+    LottieDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        dialog = new ProgressDialog(this);
+        dialog = new LottieDialog(this)
+                .setAnimation(R.raw.food_loading)
+                .setAnimationRepeatCount(LottieDialog.INFINITE)
+                .setAutoPlayAnimation(true)
+                .setMessage("Take a Profile Picture");
         dialog.show();
         searched_meal = findViewById(R.id.searched_meal);
         staggeredGridLayoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);

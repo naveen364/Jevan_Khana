@@ -5,26 +5,24 @@
     android:id="@+id/cardbottom"
     android:layout_height="100dp"
     app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="8dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="8dp">
     <RelativeLayout
         android:orientation="vertical"
-        android:gravity="center"
-        android:layout_margin="4dp"
-        android:layout_width="100dp"
-        android:layout_height="100dp">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
         <com.google.android.material.imageview.ShapeableImageView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:id="@+id/ingredient_img"
             android:scaleType="fitCenter"/>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_alignBottom="@+id/ingredient_img"
         android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/ingredient_img"
         android:background="@drawable/trans_shade"
-        android:orientation="horizontal"
-        tools:ignore="NotSibling">
+        android:orientation="horizontal">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -32,9 +30,9 @@
             android:text="1 PC"
             android:ellipsize="marquee"
             android:singleLine="true"
+            android:textColor="@color/white"
             android:marqueeRepeatLimit="marquee_forever"
             android:scrollHorizontally="true"
-            android:textColor="@color/white"
             android:textSize="16sp"
             android:textAlignment="center"
             android:padding="4dp"/>
@@ -49,7 +47,6 @@
             android:text="Egg"
             android:textAlignment="center"
             android:textSize="16dp"
-            android:textColor="@color/white"
             android:textStyle="bold"/>
     </LinearLayout>
     </RelativeLayout>

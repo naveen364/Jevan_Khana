@@ -10,6 +10,9 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.LinearGradient;
+import android.graphics.Shader;
 import android.os.Bundle;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -38,15 +41,15 @@ public class MainActivity extends AppCompatActivity {
     StaggeredGridLayoutManager staggeredGridLayoutManager;
     List<String> tags = new ArrayList<>();
     SearchView searchView;
-    TextView seemore;
+    TextView seemore,selected_meal_Type;
     String mealtypename = null;
+    Shader shader;
 
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Loding...");
@@ -55,14 +58,13 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(MainActivity.this,seemoreActivity.class)
                     .putExtra("type",mealtypename));
         }));
+        selected_meal_Type = findViewById(R.id.selected_meal_Type);
         searchView = findViewById(R.id.searchHome);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                tags.clear();
-                tags.add(query);
-                requestManager.getRandomRecipes(randomRecipeResponseListener,tags);
-                progressDialog.show();
+                startActivity(new Intent(MainActivity.this,searchActivity.class)
+                        .putExtra("query",query));
                 return true;
             }
 
@@ -91,13 +93,13 @@ public class MainActivity extends AppCompatActivity {
             recyclerView.setLayoutManager(HorizontalLayout);
             randomRecipeAdapter = new RandomRecipeAdapter(MainActivity.this,response.recipes,recipeClickListener);
             recyclerView.setAdapter(randomRecipeAdapter);
-            progressDialog.hide();
+            progressDialog.dismiss();
         }
 
         @Override
         public void didError(String message) {
             Toast.makeText(MainActivity.this, "message", Toast.LENGTH_SHORT).show();
-            progressDialog.hide();
+            progressDialog.dismiss();
         }
     };
 
@@ -112,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
                     false));
             randomRecipeAdapter = new RandomRecipeAdapter(MainActivity.this,response.recipes,recipeClickListener);
             infoRecyclerView.setAdapter(randomRecipeAdapter);
-            progressDialog.hide();
+            progressDialog.dismiss();
         }
 
         @Override
@@ -146,6 +148,12 @@ public class MainActivity extends AppCompatActivity {
                 staggeredGridLayoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
                 tags.clear();
                 tags.add(mealTypes.getName());
+                shader = new LinearGradient(
+                        0, 0, 0, 100,
+                        Color.BLUE, Color.parseColor("#E91E63"),
+                        Shader.TileMode.CLAMP );
+                selected_meal_Type.setText(mealTypes.getName());
+                selected_meal_Type.getPaint().setShader( shader );
                 mealtypename = mealTypes.getName();
                 requestManager1.getRandomRecipes(randomMealTypeResponseListener,tags);
                 progressDialog.show();
@@ -163,4 +171,16 @@ public class MainActivity extends AppCompatActivity {
 
         }
     };
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        progressDialog.dismiss();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        progressDialog.hide();
+    }
 }

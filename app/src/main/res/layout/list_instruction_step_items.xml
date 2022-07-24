@@ -2,7 +2,8 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="#b2b2b2"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardBackgroundColor="@color/white"
     android:elevation="8dp"
     android:layout_margin="8dp">
 
@@ -34,7 +35,6 @@
             android:scrollHorizontally="true"
             android:ellipsize="marquee"
             android:textAlignment="textStart"
-            android:textColor="@color/white"
             android:padding="8dp"
             android:text="Item"/>
             </LinearLayout>

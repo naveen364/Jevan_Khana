@@ -57,7 +57,6 @@ public class ReciepeDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reciepe_detail);
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         id = Integer.parseInt(getIntent().getStringExtra("id"));
         findViews();
@@ -91,7 +90,7 @@ public class ReciepeDetailActivity extends AppCompatActivity {
         viewPager2.setAdapter(adapter);
 
         meal_name = findViewById(R.id.text_view_meal_name);
-        meal_saurce = findViewById(R.id.meal_source);
+        //meal_saurce = findViewById(R.id.meal_source);
         meal_summary = findViewById(R.id.meal_summarry);
         meal_image = findViewById(R.id.imageView_mealDetail);
         ingredientRecycler = findViewById(R.id.recycler_meal_ingredients);
@@ -104,7 +103,7 @@ public class ReciepeDetailActivity extends AppCompatActivity {
         public void didFetch(ReciepeDetailsResponse response, String message) {
             dialog.dismiss();
             meal_name.setText(response.title);
-            meal_saurce.setText(response.sourceName);
+           // meal_saurce.setText(response.sourceName);
             meal_summary.setText(HtmlCompat.fromHtml(response.summary,0));
             Picasso.get().load(response.image).into(meal_image);
 

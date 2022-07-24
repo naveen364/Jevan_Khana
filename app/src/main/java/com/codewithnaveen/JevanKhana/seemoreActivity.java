@@ -38,7 +38,7 @@ public class seemoreActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seemore);
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        //this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         progressDialog1 = new ProgressDialog(this);
         progressDialog1.setTitle("Loding...");
         typeofmeal = findViewById(R.id.typeofmeal);
@@ -101,5 +101,11 @@ public class seemoreActivity extends AppCompatActivity {
             }
         });
         mealTypeRecyclerView1.setAdapter(mealTypeAdapter1);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        progressDialog1.dismiss();
     }
 }

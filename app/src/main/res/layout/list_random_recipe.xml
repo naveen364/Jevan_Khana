@@ -30,7 +30,6 @@
             android:marqueeRepeatLimit="marquee_forever"
             android:scrollHorizontally="true"
             android:textStyle="bold"
-            android:textColor="@color/white"
             android:padding="8dp"/>
 
         <LinearLayout

@@ -5,13 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_margin="8dp"
+    android:background="@color/black"
     tools:context=".seemoreActivity">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Meal Types"
-        android:textColor="@color/white"
         android:textStyle="bold"
         android:layout_margin="8dp"
         android:textSize="16sp"/>
@@ -20,7 +19,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="type"
-        android:textColor="@color/white"
         android:textStyle="bold"
         android:layout_margin="8dp"
         android:textSize="12sp"/>

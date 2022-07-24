@@ -8,6 +8,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     tools:context=".MainActivity"
     android:orientation="vertical">
     <androidx.appcompat.widget.Toolbar
@@ -25,28 +26,21 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="8dp"
                 android:gravity="center"
-                android:textStyle="bold"
-                android:textColor="@color/white"/>
+                android:textStyle="bold"/>
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
-    <androidx.cardview.widget.CardView
-        android:elevation="8dp"
-        app:cardBackgroundColor="@color/gray"
-        android:layout_margin="8dp"
-        app:cardCornerRadius="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize">
-
         <androidx.appcompat.widget.SearchView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
             android:id="@+id/searchHome"
-            android:background="@drawable/circle"
             app:queryHint="search your reciepe"
             app:iconifiedByDefault="false"
             app:searchIcon="@drawable/ic_baseline_search_24"/>
-
-    </androidx.cardview.widget.CardView>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:src="@drawable/banner1"/>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -58,7 +52,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Meal Types"
-        android:textColor="@color/white"
         android:textStyle="bold"
         android:layout_margin="8dp"
         android:textSize="16sp"/>
@@ -75,7 +68,6 @@
             android:layout_height="wrap_content"
             android:text="Main Course"
             android:layout_gravity="left"
-            android:textColor="@color/white"
             android:textStyle="bold"
             android:layout_margin="8dp"
             android:textSize="16sp"/>
@@ -86,7 +78,6 @@
             android:text="see more"
             android:layout_alignParentRight="true"
             android:layout_gravity="right"
-            android:textColor="@color/white"
             android:textStyle="bold"
             android:layout_margin="8dp"
             android:textSize="16sp"/>

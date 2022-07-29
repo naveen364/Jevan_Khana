@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -46,6 +47,7 @@ public class seemoreActivity extends AppCompatActivity {
                 .setAutoPlayAnimation(true)
                 .setMessage("Take a Profile Picture");
         progressDialog1.setTitle("Loding...");
+        progressDialog1.setDialogBackground(Color.WHITE);
         typeofmeal = findViewById(R.id.typeofmeal);
         typeofmeal.setText("main course");
         loadMealType();

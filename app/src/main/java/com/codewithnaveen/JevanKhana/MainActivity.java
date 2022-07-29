@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 .setAutoPlayAnimation(true)
                 .setMessage("Take a Profile Picture");
         progressDialog.setTitle("Loding...");
+        progressDialog.setDialogBackground(Color.WHITE);
         seemore = findViewById(R.id.more_detail_meal);
         seemore.setOnClickListener((v -> {
             startActivity(new Intent(MainActivity.this,seemoreActivity.class)

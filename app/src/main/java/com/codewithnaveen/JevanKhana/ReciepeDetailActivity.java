@@ -11,6 +11,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -80,6 +81,7 @@ public class ReciepeDetailActivity extends AppCompatActivity {
                 .setAutoPlayAnimation(true)
                 .setMessage("Take a Profile Picture");
         dialog.setTitle("Loading...");
+        dialog.setDialogBackground(Color.WHITE);
         dialog.show();
     }
 

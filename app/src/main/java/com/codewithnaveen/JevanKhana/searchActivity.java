@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -37,6 +38,7 @@ public class searchActivity extends AppCompatActivity {
                 .setAnimationRepeatCount(LottieDialog.INFINITE)
                 .setAutoPlayAnimation(true)
                 .setMessage("Take a Profile Picture");
+        dialog.setDialogBackground(Color.WHITE);
         dialog.show();
         searched_meal = findViewById(R.id.searched_meal);
         staggeredGridLayoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);

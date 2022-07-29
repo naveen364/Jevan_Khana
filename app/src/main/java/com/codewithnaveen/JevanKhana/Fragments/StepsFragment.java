@@ -9,13 +9,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.codewithnaveen.JevanKhana.Adapters.InstructionAdapter;
 import com.codewithnaveen.JevanKhana.Listeners.InstructionListener;
 import com.codewithnaveen.JevanKhana.Models.InstructionResponse;
 import com.codewithnaveen.JevanKhana.R;
-import com.codewithnaveen.JevanKhana.ReciepeDetailActivity;
 import com.codewithnaveen.JevanKhana.RequestManager;
 
 import java.util.List;
@@ -63,7 +61,6 @@ public class StepsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_steps, container, false);
-        Toast.makeText(getContext(), "id==="+id, Toast.LENGTH_SHORT).show();
         manager4 = new RequestManager(getContext());
         meal_Instruction_steps4 = view.findViewById(R.id.meal_Instruction_steps);
         manager4.getInstruction(instructionListener,id);
@@ -73,7 +70,6 @@ public class StepsFragment extends Fragment {
     private final InstructionListener instructionListener = new InstructionListener() {
         @Override
         public void didFetch(List<InstructionResponse> response, String message) {
-            Toast.makeText(getContext(), "inside listner", Toast.LENGTH_SHORT).show();
             meal_Instruction_steps4.setHasFixedSize(true);
             meal_Instruction_steps4.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
             instructionAdapter4 = new InstructionAdapter(getContext(),response);

@@ -8,15 +8,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Shader;
 import android.os.Bundle;
-import android.view.WindowManager;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.amrdeveloper.lottiedialog.LottieDialog;
 import com.codewithnaveen.JevanKhana.Adapters.MealTypeAdapter;
@@ -106,7 +103,6 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void didError(String message) {
-            Toast.makeText(MainActivity.this, "message", Toast.LENGTH_SHORT).show();
             progressDialog.dismiss();
         }
     };
@@ -116,10 +112,7 @@ public class MainActivity extends AppCompatActivity {
         public void didFetch(RandomRecipeApiResponse response, String message) {
             infoRecyclerView = findViewById(R.id.mealList);
             infoRecyclerView.setHasFixedSize(true);
-            infoRecyclerView.setLayoutManager( new LinearLayoutManager(
-                    MainActivity.this,
-                    LinearLayoutManager.HORIZONTAL,
-                    false));
+            infoRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.HORIZONTAL));
             randomRecipeAdapter = new RandomRecipeAdapter(MainActivity.this,response.recipes,recipeClickListener);
             infoRecyclerView.setAdapter(randomRecipeAdapter);
             progressDialog.dismiss();
@@ -127,7 +120,6 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void didError(String message) {
-            Toast.makeText(MainActivity.this, "message", Toast.LENGTH_SHORT).show();
             progressDialog.dismiss();
         }
     };
@@ -167,7 +159,6 @@ public class MainActivity extends AppCompatActivity {
                 mealtypename = mealTypes.getName();
                 requestManager1.getRandomRecipes(randomMealTypeResponseListener,tags);
                 progressDialog.show();
-                Toast.makeText(MainActivity.this, "mealType==>"+mealTypes.getName(), Toast.LENGTH_SHORT).show();
             }
         });
         mealTypeRecyclerView.setAdapter(mealTypeAdapter);
@@ -175,7 +166,6 @@ public class MainActivity extends AppCompatActivity {
     private final RecipeClickListener recipeClickListener = new RecipeClickListener() {
         @Override
         public void onRecipeClicked(String id) {
-            //Toast.makeText(MainActivity.this,id,Toast.LENGTH_SHORT).show();
             startActivity(new Intent(MainActivity.this,ReciepeDetailActivity.class)
             .putExtra("id",id));
 

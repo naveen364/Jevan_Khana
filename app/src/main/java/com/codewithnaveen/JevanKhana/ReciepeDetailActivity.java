@@ -50,7 +50,7 @@ public class ReciepeDetailActivity extends AppCompatActivity {
     InstructionAdapter instructionAdapter;
     private TabLayout tabLayout;
     private ViewPager2 viewPager2;
-    private String[] labels = new String[]{"Steps", "Similar"};
+    private final String[] labels = new String[]{"Steps", "Similar"};
 
     ViewPagerFragmentAdapter adapter;
 
@@ -92,7 +92,6 @@ public class ReciepeDetailActivity extends AppCompatActivity {
         viewPager2 = findViewById(R.id.view_pager2);
         // create adapter instance
         adapter = new ViewPagerFragmentAdapter(this, id);
-        Toast.makeText(this, "ids from detail="+id, Toast.LENGTH_SHORT).show();
         // set adapter to viewPager2
         viewPager2.setAdapter(adapter);
 
@@ -122,46 +121,7 @@ public class ReciepeDetailActivity extends AppCompatActivity {
 
         @Override
         public void didError(String message) {
-            Toast.makeText(ReciepeDetailActivity.this, "message"+message, Toast.LENGTH_SHORT).show();
         }
     };
-
-//    private final SimilarRecipeListener similarRecipeListener = new SimilarRecipeListener() {
-//        @Override
-//        public void didFetch(List<SimilarRecipe> response, String message) {
-//            similarMealRecycler.setHasFixedSize(true);
-//            similarMealRecycler.setLayoutManager(new LinearLayoutManager(ReciepeDetailActivity.this,LinearLayoutManager.HORIZONTAL,false));
-//            similarRecipeAdapter = new SimilarRecipeAdapter(ReciepeDetailActivity.this,response,recipeClickListener);
-//            similarMealRecycler.setAdapter(similarRecipeAdapter);
-//        }
-//
-//        @Override
-//        public void didError(String message) {
-//            Toast.makeText(ReciepeDetailActivity.this,"message==>"+message,Toast.LENGTH_SHORT).show();
-//        }
-//    };
-//    private final RecipeClickListener recipeClickListener = new RecipeClickListener() {
-//        @Override
-//        public void onRecipeClicked(String id) {
-//            startActivity(new Intent(ReciepeDetailActivity.this,ReciepeDetailActivity.class)
-//            .putExtra("id",id));
-//
-//        }
-//    };
-
-//    private final InstructionListener instructionListener = new InstructionListener() {
-//        @Override
-//        public void didFetch(List<InstructionResponse> response, String message) {
-//            meal_Instruction_steps.setHasFixedSize(true);
-//            meal_Instruction_steps.setLayoutManager(new LinearLayoutManager(ReciepeDetailActivity.this,LinearLayoutManager.VERTICAL,false));
-//            instructionAdapter = new InstructionAdapter(ReciepeDetailActivity.this,response);
-//            meal_Instruction_steps.setAdapter(instructionAdapter);
-//        }
-//
-//        @Override
-//        public void didError(String message) {
-//
-//        }
-//    };
 
 }

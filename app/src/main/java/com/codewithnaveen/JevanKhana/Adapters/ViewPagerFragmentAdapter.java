@@ -16,7 +16,6 @@ public class ViewPagerFragmentAdapter extends FragmentStateAdapter {
     public ViewPagerFragmentAdapter(@NonNull FragmentActivity fragmentActivity, int id) {
         super(fragmentActivity);
         this.id = id;
-        Toast.makeText(fragmentActivity, "from frag"+this.id, Toast.LENGTH_SHORT).show();
     }
 
     // return fragments at every position

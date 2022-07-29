@@ -5,13 +5,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.WindowManager;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.amrdeveloper.lottiedialog.LottieDialog;
 import com.codewithnaveen.JevanKhana.Adapters.MealTypeAdapter;
@@ -66,14 +63,12 @@ public class seemoreActivity extends AppCompatActivity {
 
         @Override
         public void didError(String message) {
-            Toast.makeText(seemoreActivity.this, "message", Toast.LENGTH_SHORT).show();
             progressDialog1.dismiss();
         }
     };
     private final RecipeClickListener recipeClickListener = new RecipeClickListener() {
         @Override
         public void onRecipeClicked(String id) {
-            //Toast.makeText(MainActivity.this,id,Toast.LENGTH_SHORT).show();
             startActivity(new Intent(seemoreActivity.this,ReciepeDetailActivity.class)
                     .putExtra("id",id));
 
@@ -104,7 +99,6 @@ public class seemoreActivity extends AppCompatActivity {
                 typeofmeal.setText(mealTypes.getName());
                 requestManager11.getRandomRecipes(randomMealTypeResponseListener,tags);
                 progressDialog1.show();
-                Toast.makeText(seemoreActivity.this, "mealType==>"+mealTypes.getName(), Toast.LENGTH_SHORT).show();
             }
         });
         mealTypeRecyclerView1.setAdapter(mealTypeAdapter1);

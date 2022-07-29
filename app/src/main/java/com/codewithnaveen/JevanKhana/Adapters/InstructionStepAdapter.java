@@ -33,7 +33,7 @@ public class InstructionStepAdapter extends RecyclerView.Adapter<InstructionStep
     @Override
     public void onBindViewHolder(@NonNull InstructionStepViewHolder holder, int position) {
         holder.Instruction_step_title.setText(list.get(position).step);
-        holder.instruction_step_number.setText("Step:"+String.valueOf(list.get(position).number));
+        holder.instruction_step_number.setText("Step:"+ list.get(position).number);
         holder.recycler_Instruction_ingredent.setHasFixedSize(true);
         holder.recycler_Instruction_ingredent.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false));
         InstructionIngredientAdapter instructionIngredientAdapter = new InstructionIngredientAdapter(context,list.get(position).ingredients);

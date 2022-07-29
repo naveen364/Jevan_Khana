@@ -20,8 +20,8 @@ import java.util.ArrayList;
 
 public class MealTypeAdapter extends RecyclerView.Adapter<MealTypeAdapter.ViewHolder>{
 
-    private ArrayList<mealType> mealTypeArrayList;
-    private Context context;
+    private final ArrayList<mealType> mealTypeArrayList;
+    private final Context context;
     private OnItemClickListener listener;
     private int row_index = -1;
     Boolean stopRecursion = true;
@@ -58,8 +58,8 @@ public class MealTypeAdapter extends RecyclerView.Adapter<MealTypeAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView Name;
-        private ImageView img;
+        private final TextView Name;
+        private final ImageView img;
         LinearLayout row_linearlayout;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

@@ -44,7 +44,6 @@ public class searchActivity extends AppCompatActivity {
         staggeredGridLayoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
         //this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         tags.clear();
-        Toast.makeText(searchActivity.this,"query"+getIntent().getStringExtra("query"),Toast.LENGTH_SHORT).show();
         query = getIntent().getStringExtra("query");
         tags.add(query);
         managers = new RequestManager(this);
@@ -53,7 +52,6 @@ public class searchActivity extends AppCompatActivity {
     private final RandomRecipeResponseListener randomRecipeResponseListener = new RandomRecipeResponseListener() {
         @Override
         public void didFetch(RandomRecipeApiResponse response, String message) {
-            Toast.makeText(searchActivity.this,"inside recipeResponse",Toast.LENGTH_SHORT).show();
             searched_meal.setHasFixedSize(true);
             searched_meal.setLayoutManager(staggeredGridLayoutManager);
             randomRecipeAdapter = new RandomRecipeAdapter(searchActivity.this,response.recipes,recipeClickListener);
@@ -63,13 +61,11 @@ public class searchActivity extends AppCompatActivity {
 
         @Override
         public void didError(String message) {
-            Toast.makeText(searchActivity.this, "message", Toast.LENGTH_SHORT).show();
         }
     };
     private final RecipeClickListener recipeClickListener = new RecipeClickListener() {
         @Override
         public void onRecipeClicked(String id) {
-            //Toast.makeText(MainActivity.this,id,Toast.LENGTH_SHORT).show();
             startActivity(new Intent(searchActivity.this,ReciepeDetailActivity.class)
                     .putExtra("id",id));
 

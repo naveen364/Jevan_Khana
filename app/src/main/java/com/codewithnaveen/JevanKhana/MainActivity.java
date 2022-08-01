@@ -14,6 +14,7 @@ import android.graphics.LinearGradient;
 import android.graphics.Shader;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
         progressDialog = new LottieDialog(this)
                 .setAnimation(R.raw.food_loading)
                 .setAnimationRepeatCount(LottieDialog.INFINITE)
@@ -85,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onQueryTextChange(String newText) {
                 if(newText.isEmpty()){
                     autosearchrecycler.setVisibility(View.GONE);
-                }else if(newText.length()>2){
+                }else if(newText.length()>1){
                     requestManager.getAutoCompleteSearch(autoCompleteSearchListener,newText);
                     autosearchrecycler.setVisibility(View.VISIBLE);
                 }else{
@@ -181,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
                 tags.add(mealTypes.getName());
                 shader = new LinearGradient(
                         0, 0, 0, 100,
-                        Color.BLUE, Color.parseColor("#E91E63"),
+                        Color.parseColor("#2068f1"), Color.parseColor("#c024ff"),
                         Shader.TileMode.CLAMP );
                 meal_Trend.getPaint().setShader(shader);
                 meal_type_textview.getPaint().setShader(shader);

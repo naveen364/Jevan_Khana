@@ -14,7 +14,7 @@
         android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
-            android:background="@color/teal_700"
+            android:background="@drawable/bubble"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView

@@ -13,26 +13,32 @@ import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Shader;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.amrdeveloper.lottiedialog.LottieDialog;
+import com.codewithnaveen.JevanKhana.Adapters.AutoSearchAdapter;
 import com.codewithnaveen.JevanKhana.Adapters.MealTypeAdapter;
 import com.codewithnaveen.JevanKhana.Adapters.OnItemClickListener;
 import com.codewithnaveen.JevanKhana.Adapters.RandomRecipeAdapter;
+import com.codewithnaveen.JevanKhana.Listeners.AutoCompleteSearchListener;
 import com.codewithnaveen.JevanKhana.Listeners.RandomRecipeResponseListener;
 import com.codewithnaveen.JevanKhana.Listeners.RecipeClickListener;
 import com.codewithnaveen.JevanKhana.Models.RandomRecipeApiResponse;
 import com.codewithnaveen.JevanKhana.Models.mealType;
+import com.codewithnaveen.JevanKhana.Models.searchItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    RequestManager requestManager,requestManager1;
+    RequestManager requestManager,requestManager1,requestManager2;
     RandomRecipeAdapter randomRecipeAdapter, randomTypeRecipeAdapter;
     MealTypeAdapter mealTypeAdapter;
-    RecyclerView recyclerView,mealTypeRecyclerView,infoRecyclerView;
+    AutoSearchAdapter autoSearchAdapter;
+    RecyclerView recyclerView,mealTypeRecyclerView,infoRecyclerView,autosearchrecycler;
     LinearLayoutManager HorizontalLayout,hlayout,hlayout1;
     ArrayList<mealType> mealTypeArrayList = new ArrayList<>();
     StaggeredGridLayoutManager staggeredGridLayoutManager;
@@ -64,7 +70,9 @@ public class MainActivity extends AppCompatActivity {
         selected_meal_Type = findViewById(R.id.selected_meal_Type);
         meal_type_textview =findViewById(R.id.meal_type_textview);
         meal_Trend = findViewById(R.id.meal_Trend);
+        autosearchrecycler = findViewById(R.id.autosearchrecycler);
         searchView = findViewById(R.id.searchHome);
+        requestManager2 = new RequestManager(this);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -75,6 +83,14 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                if(newText.isEmpty()){
+                    autosearchrecycler.setVisibility(View.GONE);
+                }else if(newText.length()>2){
+                    requestManager.getAutoCompleteSearch(autoCompleteSearchListener,newText);
+                    autosearchrecycler.setVisibility(View.VISIBLE);
+                }else{
+                    return false;
+                }
                 return false;
             }
         });
@@ -89,6 +105,21 @@ public class MainActivity extends AppCompatActivity {
         progressDialog.show();
         loadMealType();
     }
+
+    private final AutoCompleteSearchListener autoCompleteSearchListener = new AutoCompleteSearchListener() {
+        @Override
+        public void didFetch(List<searchItem> response, String message) {
+            autosearchrecycler.setHasFixedSize(true);
+            autosearchrecycler.setLayoutManager(new StaggeredGridLayoutManager(1,StaggeredGridLayoutManager.VERTICAL));
+            autoSearchAdapter = new AutoSearchAdapter(MainActivity.this,response);
+            autosearchrecycler.setAdapter(autoSearchAdapter);
+        }
+
+        @Override
+        public void didError(String message) {
+
+        }
+    };
 
     private final RandomRecipeResponseListener randomRecipeResponseListener = new RandomRecipeResponseListener() {
         @Override

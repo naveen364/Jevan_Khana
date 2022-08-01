@@ -17,6 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/mealname"
+        android:visibility="gone"
         android:textColor="@color/black"
         android:textSize="6sp"
         android:layout_gravity="center"

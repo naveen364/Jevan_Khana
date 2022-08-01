@@ -1,7 +1,9 @@
 package com.codewithnaveen.JevanKhana;
 
 import android.content.Context;
+import android.widget.Toast;
 
+import com.codewithnaveen.JevanKhana.Listeners.AutoCompleteSearchListener;
 import com.codewithnaveen.JevanKhana.Listeners.InstructionListener;
 import com.codewithnaveen.JevanKhana.Listeners.RandomRecipeResponseListener;
 import com.codewithnaveen.JevanKhana.Listeners.RecipeDetailsListner;
@@ -10,6 +12,7 @@ import com.codewithnaveen.JevanKhana.Models.InstructionResponse;
 import com.codewithnaveen.JevanKhana.Models.RandomRecipeApiResponse;
 import com.codewithnaveen.JevanKhana.Models.ReciepeDetailsResponse;
 import com.codewithnaveen.JevanKhana.Models.SimilarRecipe;
+import com.codewithnaveen.JevanKhana.Models.searchItem;
 
 import java.util.List;
 
@@ -113,6 +116,26 @@ public class RequestManager {
         });
     }
 
+    public void getAutoCompleteSearch(AutoCompleteSearchListener listener, String query){
+        CallAutoSearch callAutoSearch = retrofit.create(CallAutoSearch.class);
+        Call<List<searchItem>> call = callAutoSearch.callAutoSearchResponse(query,10,context.getString(R.string.api_key));
+        call.enqueue(new Callback<List<searchItem>>() {
+            @Override
+            public void onResponse(Call<List<searchItem>> call, Response<List<searchItem>> response) {
+                if(!response.isSuccessful()){
+                    listener.didError(response.message());
+                    return;
+                }
+                listener.didFetch(response.body(),response.message());
+            }
+
+            @Override
+            public void onFailure(Call<List<searchItem>> call, Throwable t) {
+                listener.didError(t.getMessage());
+            }
+        });
+    }
+
     private interface CallRandomRecipes{
         @GET("recipes/random")
         Call<RandomRecipeApiResponse> callRandomRecipe(
@@ -143,6 +166,15 @@ public class RequestManager {
         @GET("recipes/{id}/analyzedInstructions")
         Call<List<InstructionResponse>> callInstructionResponse(
                 @Path("id") int id,
+                @Query("apiKey") String apiKey
+        );
+    }
+
+    private interface CallAutoSearch{
+        @GET("recipes/autocomplete")
+        Call<List<searchItem>> callAutoSearchResponse(
+                @Query("query") String query,
+                @Query("number") int number,
                 @Query("apiKey") String apiKey
         );
     }

@@ -4,6 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Cloud Analogy/AndroidStudioProjects/JevanKhana/app/src/main/res/drawable/circle.xml" value="0.164" />
+        <entry key="..\:/Users/Cloud Analogy/AndroidStudioProjects/JevanKhana/app/src/main/res/drawable/gradientcolor.xml" value="0.12" />
+        <entry key="..\:/Users/Cloud Analogy/AndroidStudioProjects/JevanKhana/app/src/main/res/drawable/ic_like.xml" value="0.12" />
+        <entry key="..\:/Users/Cloud Analogy/AndroidStudioProjects/JevanKhana/app/src/main/res/drawable/ic_servings.xml" value="0.12" />
+        <entry key="..\:/Users/Cloud Analogy/AndroidStudioProjects/JevanKhana/app/src/main/res/drawable/ic_time.xml" value="0.12" />
         <entry key="..\:/Users/Cloud Analogy/AndroidStudioProjects/JevanKhana/app/src/main/res/drawable/searchbar.xml" value="0.122" />
         <entry key="..\:/Users/Cloud Analogy/AndroidStudioProjects/JevanKhana/app/src/main/res/drawable/selected_circle.xml" value="0.1845" />
         <entry key="..\:/Users/Cloud Analogy/AndroidStudioProjects/JevanKhana/app/src/main/res/drawable/trans_shade.xml" value="0.179" />
@@ -23,6 +27,7 @@
         <entry key="..\:/Users/Cloud Analogy/AndroidStudioProjects/JevanKhana/app/src/main/res/layout/list_meal_type.xml" value="0.6" />
         <entry key="..\:/Users/Cloud Analogy/AndroidStudioProjects/JevanKhana/app/src/main/res/layout/list_random_recipe.xml" value="0.264" />
         <entry key="..\:/Users/Cloud Analogy/AndroidStudioProjects/JevanKhana/app/src/main/res/layout/list_similar_recipe.xml" value="0.25" />
+        <entry key="..\:/Users/Cloud Analogy/AndroidStudioProjects/JevanKhana/app/src/main/res/layout/searchlist.xml" value="0.25" />
         <entry key="..\:/Users/Cloud Analogy/AndroidStudioProjects/JevanKhana/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.179" />
         <entry key="..\:/Users/Cloud Analogy/AndroidStudioProjects/JevanKhana/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.179" />
       </map>

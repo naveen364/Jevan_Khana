@@ -37,7 +37,7 @@ public class searchActivity extends AppCompatActivity {
                 .setAnimation(R.raw.food_loading)
                 .setAnimationRepeatCount(LottieDialog.INFINITE)
                 .setAutoPlayAnimation(true)
-                .setMessage("Take a Profile Picture");
+                .setMessage("");
         dialog.setDialogBackground(Color.WHITE);
         dialog.show();
         searched_meal = findViewById(R.id.searched_meal);

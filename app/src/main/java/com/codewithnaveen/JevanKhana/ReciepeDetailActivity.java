@@ -23,15 +23,8 @@ import com.codewithnaveen.JevanKhana.Adapters.InstructionAdapter;
 import com.codewithnaveen.JevanKhana.Adapters.SimilarRecipeAdapter;
 import com.codewithnaveen.JevanKhana.Adapters.ViewPagerFragmentAdapter;
 import com.codewithnaveen.JevanKhana.Adapters.ingredientsAdapter;
-import com.codewithnaveen.JevanKhana.Fragments.SimilarMealFragment;
-import com.codewithnaveen.JevanKhana.Fragments.StepsFragment;
-import com.codewithnaveen.JevanKhana.Listeners.InstructionListener;
-import com.codewithnaveen.JevanKhana.Listeners.RecipeClickListener;
 import com.codewithnaveen.JevanKhana.Listeners.RecipeDetailsListner;
-import com.codewithnaveen.JevanKhana.Listeners.SimilarRecipeListener;
-import com.codewithnaveen.JevanKhana.Models.InstructionResponse;
 import com.codewithnaveen.JevanKhana.Models.ReciepeDetailsResponse;
-import com.codewithnaveen.JevanKhana.Models.SimilarRecipe;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.squareup.picasso.Picasso;
@@ -67,14 +60,11 @@ public class ReciepeDetailActivity extends AppCompatActivity {
             tab.setText(labels[position]);
         }).attach();
         // set default position to 1 instead of default 0
-        viewPager2.setCurrentItem(1, true);
-
-        Toast.makeText(this, "id==>"+id, Toast.LENGTH_SHORT).show();
-
+        viewPager2.setCurrentItem(0, true);
+        viewPager2.setUserInputEnabled(false);
         manager = new RequestManager(this);
+
         manager.getRecipeDetails(recipeDetailsListner,id);
-        //manager.getSimilarRecipe(similarRecipeListener,id);
-        //manager.getInstruction(instructionListener,id);
         dialog = new LottieDialog(this)
                 .setAnimation(R.raw.food_loading)
                 .setAnimationRepeatCount(LottieDialog.INFINITE)
@@ -96,12 +86,9 @@ public class ReciepeDetailActivity extends AppCompatActivity {
         viewPager2.setAdapter(adapter);
 
         meal_name = findViewById(R.id.text_view_meal_name);
-        //meal_saurce = findViewById(R.id.meal_source);
         meal_summary = findViewById(R.id.meal_summarry);
         meal_image = findViewById(R.id.imageView_mealDetail);
         ingredientRecycler = findViewById(R.id.recycler_meal_ingredients);
-        //similarMealRecycler = findViewById(R.id.meal_similar);
-        //meal_Instruction_steps = findViewById(R.id.meal_Instruction_steps);
     }
 
     private final RecipeDetailsListner recipeDetailsListner = new RecipeDetailsListner() {
